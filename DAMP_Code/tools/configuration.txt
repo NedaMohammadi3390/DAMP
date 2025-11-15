@@ -1,0 +1,12 @@
+spring-cloud-starter-config  
+spring-cloud-config-client  
+spring-cloud-config-server  
+spring-cloud-starter-kubernetes-config  
+vertx-config-kubernetes-configmap  
+com.typesafe:config  
+archaius-core  
+archaius  
+archaius-legacy  
+archaius-aws  
+spring-cloud-starter-archaius  
+spring-cloud-starter-netflix-archaius  

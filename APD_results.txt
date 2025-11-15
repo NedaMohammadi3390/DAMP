@@ -1,0 +1,973 @@
+=========================  General Information of System  =============================
+
+number of microservices : 12
+Total lines of code (LOCs) : 84188
+Total number of files : 1044
+Avg LOCs per service : 7015.666666666667
+Avg Files per service : 87.0
+
+total number of apis: 196
+
+name of services:
+
+name: apollo-adminservice
+name: apollo-assembly
+name: apollo-biz
+name: apollo-buildtools
+name: apollo-client
+name: apollo-common
+name: apollo-configservice
+name: apollo-core
+name: apollo-demo
+name: apollo-mockserver
+name: apollo-openapi
+name: apollo-portal
+#1
+Anti-Pattern Name: Wrong Cuts
+
+| Anti-Pattern | Status       |
+|--------------|--------------|
+| Wrong Cuts   | Not detected |
+
+===================================================================================
+
+#2
+Anti-Pattern Name: Mega Services
+
+| Anti-Pattern    | Status       |
+|-----------------|--------------|
+| Mega Services   | Detected     |
+
+### Characteristics of Detected Mega Services:
+
+Service Name            LOCs   LOC Threshold    #LOCs in system    #APIs  API Ratio   Total APIs
+------------------------------------------------------------------------------------------------
+apollo-portal          43502        32833.32              84188      130       0.66      196
+
+===================================================================================
+
+#3
+Anti-Pattern Name: Nano Services
+
+| Anti-Pattern    | Status       |
+|-----------------|--------------|
+| Nano Services   | Detected     |
+
+### Characteristics of Detected Nano Services:
+
+Service Name            LOCs   LOC Threshold    #LOCs in system    #APIs  API Ratio   Total APIs
+------------------------------------------------------------------------------------------------
+apollo-assembly          206         1403.00              84188        0       0.00      196
+apollo-demo              547         1403.00              84188        0       0.00      196
+
+===================================================================================
+
+#4
+Anti-Pattern Name: Shared Libraries
+
+| Anti-Pattern     | Status       |
+|------------------|--------------|
+| Shared Libraries | Detected     |
+
+### Characteristics of Detected Shared Libraries:
+
+
+*** Shared Libraries in dependencies (Maven or Gradle files) were found:
+
+Dependency                               Used By Services                                            
+----------------------------------------------------------------------------------------------------
+apollo-biz                               apollo-adminservice, apollo-configservice                   
+apollo-common                            apollo-biz, apollo-portal                                   
+apollo-core                              apollo-client, apollo-common, apollo-openapi                
+apollo-client                            apollo-demo, apollo-mockserver                              
+----------------------------------------------------------------------------------------------------
+
+
+*** Dependencies among microservices are established through code-level imports, where services directly reference each other's components:
+
+Microservice                             Uses                                                        
+----------------------------------------------------------------------------------------------------
+apollo-adminservice                      com.ctrip.framework.apollo.biz.apollobizconfig              
+apollo-adminservice                      com.ctrip.framework.apollo.biz.config.bizconfig             
+apollo-adminservice                      com.ctrip.framework.apollo.biz.entity.accesskey             
+apollo-adminservice                      com.ctrip.framework.apollo.biz.entity.cluster               
+apollo-adminservice                      com.ctrip.framework.apollo.biz.entity.commit                
+apollo-adminservice                      com.ctrip.framework.apollo.biz.entity.grayreleaserule       
+apollo-adminservice                      com.ctrip.framework.apollo.biz.entity.instance              
+apollo-adminservice                      com.ctrip.framework.apollo.biz.entity.instanceconfig        
+apollo-adminservice                      com.ctrip.framework.apollo.biz.entity.item                  
+apollo-adminservice                      com.ctrip.framework.apollo.biz.entity.namespace             
+apollo-adminservice                      com.ctrip.framework.apollo.biz.entity.namespacelock         
+apollo-adminservice                      com.ctrip.framework.apollo.biz.entity.release               
+apollo-adminservice                      com.ctrip.framework.apollo.biz.entity.releasehistory        
+apollo-adminservice                      com.ctrip.framework.apollo.biz.message.messagesender        
+apollo-adminservice                      com.ctrip.framework.apollo.biz.message.topics               
+apollo-adminservice                      com.ctrip.framework.apollo.biz.service.accesskeyservice     
+apollo-adminservice                      com.ctrip.framework.apollo.biz.service.adminservice         
+apollo-adminservice                      com.ctrip.framework.apollo.biz.service.appnamespaceservice  
+apollo-adminservice                      com.ctrip.framework.apollo.biz.service.appservice           
+apollo-adminservice                      com.ctrip.framework.apollo.biz.service.clusterservice       
+apollo-adminservice                      com.ctrip.framework.apollo.biz.service.commitservice        
+apollo-adminservice                      com.ctrip.framework.apollo.biz.service.instanceservice      
+apollo-adminservice                      com.ctrip.framework.apollo.biz.service.itemservice          
+apollo-adminservice                      com.ctrip.framework.apollo.biz.service.itemsetservice       
+apollo-adminservice                      com.ctrip.framework.apollo.biz.service.namespacebranchservice
+apollo-adminservice                      com.ctrip.framework.apollo.biz.service.namespacelockservice 
+apollo-adminservice                      com.ctrip.framework.apollo.biz.service.namespaceservice     
+apollo-adminservice                      com.ctrip.framework.apollo.biz.service.releasehistoryservice
+apollo-adminservice                      com.ctrip.framework.apollo.biz.service.releaseservice       
+apollo-adminservice                      com.ctrip.framework.apollo.biz.utils.configchangecontentbuilder
+apollo-adminservice                      com.ctrip.framework.apollo.biz.utils.releasemessagekeygenerator
+apollo-adminservice                      com.ctrip.framework.apollo.common.apollocommonconfig        
+apollo-adminservice                      com.ctrip.framework.apollo.common.constants.gsontype        
+apollo-adminservice                      com.ctrip.framework.apollo.common.constants.namespacebranchstatus
+apollo-adminservice                      com.ctrip.framework.apollo.common.dto.accesskeydto          
+apollo-adminservice                      com.ctrip.framework.apollo.common.dto.appdto                
+apollo-adminservice                      com.ctrip.framework.apollo.common.dto.appnamespacedto       
+apollo-adminservice                      com.ctrip.framework.apollo.common.dto.clusterdto            
+apollo-adminservice                      com.ctrip.framework.apollo.common.dto.commitdto             
+apollo-adminservice                      com.ctrip.framework.apollo.common.dto.grayreleaseruledto    
+apollo-adminservice                      com.ctrip.framework.apollo.common.dto.instanceconfigdto     
+apollo-adminservice                      com.ctrip.framework.apollo.common.dto.instancedto           
+apollo-adminservice                      com.ctrip.framework.apollo.common.dto.itemchangesets        
+apollo-adminservice                      com.ctrip.framework.apollo.common.dto.itemdto               
+apollo-adminservice                      com.ctrip.framework.apollo.common.dto.namespacedto          
+apollo-adminservice                      com.ctrip.framework.apollo.common.dto.namespacelockdto      
+apollo-adminservice                      com.ctrip.framework.apollo.common.dto.pagedto               
+apollo-adminservice                      com.ctrip.framework.apollo.common.dto.releasedto            
+apollo-adminservice                      com.ctrip.framework.apollo.common.dto.releasehistorydto     
+apollo-adminservice                      com.ctrip.framework.apollo.common.entity.app                
+apollo-adminservice                      com.ctrip.framework.apollo.common.entity.appnamespace       
+apollo-adminservice                      com.ctrip.framework.apollo.common.exception.badrequestexception
+apollo-adminservice                      com.ctrip.framework.apollo.common.exception.notfoundexception
+apollo-adminservice                      com.ctrip.framework.apollo.common.exception.serviceexception
+apollo-adminservice                      com.ctrip.framework.apollo.common.utils.beanutils           
+apollo-adminservice                      com.ctrip.framework.apollo.common.utils.grayreleaseruleitemtransformer
+apollo-adminservice                      com.ctrip.framework.apollo.core.configconsts                
+apollo-adminservice                      com.ctrip.framework.apollo.core.enums.configfileformat      
+apollo-adminservice                      com.ctrip.framework.apollo.core.utils.stringutils           
+apollo-assembly                          com.ctrip.framework.apollo.adminservice.adminserviceapplication
+apollo-assembly                          com.ctrip.framework.apollo.configservice.configserviceapplication
+apollo-assembly                          com.ctrip.framework.apollo.portal.portalapplication         
+apollo-biz                               com.ctrip.framework.apollo.common.condition.conditionalonmissingprofile
+apollo-biz                               com.ctrip.framework.apollo.common.config.refreshableconfig  
+apollo-biz                               com.ctrip.framework.apollo.common.config.refreshablepropertysource
+apollo-biz                               com.ctrip.framework.apollo.common.constants.gsontype        
+apollo-biz                               com.ctrip.framework.apollo.common.constants.namespacebranchstatus
+apollo-biz                               com.ctrip.framework.apollo.common.constants.releaseoperation
+apollo-biz                               com.ctrip.framework.apollo.common.constants.releaseoperationcontext
+apollo-biz                               com.ctrip.framework.apollo.common.customize.loggingcustomizer
+apollo-biz                               com.ctrip.framework.apollo.common.dto.grayreleaseruleitemdto
+apollo-biz                               com.ctrip.framework.apollo.common.dto.itemchangesets        
+apollo-biz                               com.ctrip.framework.apollo.common.dto.itemdto               
+apollo-biz                               com.ctrip.framework.apollo.common.entity.app                
+apollo-biz                               com.ctrip.framework.apollo.common.entity.appnamespace       
+apollo-biz                               com.ctrip.framework.apollo.common.entity.baseentity         
+apollo-biz                               com.ctrip.framework.apollo.common.exception.badrequestexception
+apollo-biz                               com.ctrip.framework.apollo.common.exception.notfoundexception
+apollo-biz                               com.ctrip.framework.apollo.common.exception.serviceexception
+apollo-biz                               com.ctrip.framework.apollo.common.utils.beanutils           
+apollo-biz                               com.ctrip.framework.apollo.common.utils.grayreleaseruleitemtransformer
+apollo-biz                               com.ctrip.framework.apollo.common.utils.uniquekeygenerator  
+apollo-biz                               com.ctrip.framework.apollo.core.configconsts                
+apollo-biz                               com.ctrip.framework.apollo.core.enums.configfileformat      
+apollo-biz                               com.ctrip.framework.apollo.core.utils.apollothreadfactory   
+apollo-biz                               com.ctrip.framework.apollo.core.utils.stringutils           
+apollo-client                            com.ctrip.framework.apollo.configservice                    
+apollo-client                            com.ctrip.framework.apollo.core.configconsts                
+apollo-client                            com.ctrip.framework.apollo.core.dto.apolloconfig            
+apollo-client                            com.ctrip.framework.apollo.core.dto.apolloconfignotification
+apollo-client                            com.ctrip.framework.apollo.core.dto.apollonotificationmessages
+apollo-client                            com.ctrip.framework.apollo.core.dto.servicedto              
+apollo-client                            com.ctrip.framework.apollo.core.enums.configfileformat      
+apollo-client                            com.ctrip.framework.apollo.core.enums.env                   
+apollo-client                            com.ctrip.framework.apollo.core.enums.envutils              
+apollo-client                            com.ctrip.framework.apollo.core.metadomainconsts            
+apollo-client                            com.ctrip.framework.apollo.core.schedule.exponentialschedulepolicy
+apollo-client                            com.ctrip.framework.apollo.core.schedule.schedulepolicy     
+apollo-client                            com.ctrip.framework.apollo.core.servicenameconsts           
+apollo-client                            com.ctrip.framework.apollo.core.signature.signature         
+apollo-client                            com.ctrip.framework.apollo.core.spi.metaserverprovider      
+apollo-client                            com.ctrip.framework.apollo.core.spi.ordered                 
+apollo-client                            com.ctrip.framework.apollo.core.utils.apollothreadfactory   
+apollo-client                            com.ctrip.framework.apollo.core.utils.classloaderutil       
+apollo-client                            com.ctrip.framework.apollo.core.utils.propertiesutil        
+apollo-client                            com.ctrip.framework.apollo.core.utils.stringutils           
+apollo-common                            com.ctrip.framework.apollo.core.enums.configfileformat      
+apollo-common                            com.ctrip.framework.apollo.core.enums.env                   
+apollo-common                            com.ctrip.framework.apollo.core.enums.envutils              
+apollo-common                            com.ctrip.framework.apollo.core.utils.apollothreadfactory   
+apollo-common                            com.ctrip.framework.apollo.core.utils.byteutil              
+apollo-common                            com.ctrip.framework.apollo.core.utils.machineutil           
+apollo-common                            com.ctrip.framework.apollo.core.utils.stringutils           
+apollo-configservice                     com.ctrip.framework.apollo.biz.apollobizconfig              
+apollo-configservice                     com.ctrip.framework.apollo.biz.config.bizconfig             
+apollo-configservice                     com.ctrip.framework.apollo.biz.entity.accesskey             
+apollo-configservice                     com.ctrip.framework.apollo.biz.entity.instance              
+apollo-configservice                     com.ctrip.framework.apollo.biz.entity.instanceconfig        
+apollo-configservice                     com.ctrip.framework.apollo.biz.entity.release               
+apollo-configservice                     com.ctrip.framework.apollo.biz.entity.releasemessage        
+apollo-configservice                     com.ctrip.framework.apollo.biz.grayreleaserule.grayreleaserulesholder
+apollo-configservice                     com.ctrip.framework.apollo.biz.message.releasemessagelistener
+apollo-configservice                     com.ctrip.framework.apollo.biz.message.releasemessagescanner
+apollo-configservice                     com.ctrip.framework.apollo.biz.message.topics               
+apollo-configservice                     com.ctrip.framework.apollo.biz.repository.accesskeyrepository
+apollo-configservice                     com.ctrip.framework.apollo.biz.repository.appnamespacerepository
+apollo-configservice                     com.ctrip.framework.apollo.biz.repository.releasemessagerepository
+apollo-configservice                     com.ctrip.framework.apollo.biz.service.appservice           
+apollo-configservice                     com.ctrip.framework.apollo.biz.service.instanceservice      
+apollo-configservice                     com.ctrip.framework.apollo.biz.service.releasemessageservice
+apollo-configservice                     com.ctrip.framework.apollo.biz.service.releaseservice       
+apollo-configservice                     com.ctrip.framework.apollo.biz.utils.entitymanagerutil      
+apollo-configservice                     com.ctrip.framework.apollo.biz.utils.releasemessagekeygenerator
+apollo-configservice                     com.ctrip.framework.apollo.common.apollocommonconfig        
+apollo-configservice                     com.ctrip.framework.apollo.common.condition.conditionalonmissingprofile
+apollo-configservice                     com.ctrip.framework.apollo.common.entity.appnamespace       
+apollo-configservice                     com.ctrip.framework.apollo.common.exception.badrequestexception
+apollo-configservice                     com.ctrip.framework.apollo.core.configconsts                
+apollo-configservice                     com.ctrip.framework.apollo.core.dto.apolloconfig            
+apollo-configservice                     com.ctrip.framework.apollo.core.dto.apolloconfignotification
+apollo-configservice                     com.ctrip.framework.apollo.core.dto.apollonotificationmessages
+apollo-configservice                     com.ctrip.framework.apollo.core.dto.servicedto              
+apollo-configservice                     com.ctrip.framework.apollo.core.servicenameconsts           
+apollo-configservice                     com.ctrip.framework.apollo.core.signature.signature         
+apollo-configservice                     com.ctrip.framework.apollo.core.utils.apollothreadfactory   
+apollo-configservice                     com.ctrip.framework.apollo.core.utils.propertiesutil        
+apollo-configservice                     com.ctrip.framework.apollo.core.utils.stringutils           
+apollo-demo                              com.ctrip.framework.apollo.configservice                    
+apollo-demo                              com.ctrip.framework.apollo.core.configconsts                
+apollo-demo                              com.ctrip.framework.apollo.core.enums.configfileformat      
+apollo-mockserver                        com.ctrip.framework.apollo.core.dto.apolloconfig            
+apollo-mockserver                        com.ctrip.framework.apollo.core.dto.apolloconfignotification
+apollo-mockserver                        com.ctrip.framework.apollo.core.utils.resourceutils         
+apollo-openapi                           com.ctrip.framework.apollo.core.configconsts                
+apollo-openapi                           com.ctrip.framework.apollo.core.enums.configfileformat      
+apollo-portal                            com.ctrip.framework.apollo.common.apollocommonconfig        
+apollo-portal                            com.ctrip.framework.apollo.common.condition.conditionalonmissingprofile
+apollo-portal                            com.ctrip.framework.apollo.common.config.refreshableconfig  
+apollo-portal                            com.ctrip.framework.apollo.common.config.refreshablepropertysource
+apollo-portal                            com.ctrip.framework.apollo.common.constants.gsontype        
+apollo-portal                            com.ctrip.framework.apollo.common.constants.releaseoperation
+apollo-portal                            com.ctrip.framework.apollo.common.constants.releaseoperationcontext
+apollo-portal                            com.ctrip.framework.apollo.common.customize.loggingcustomizer
+apollo-portal                            com.ctrip.framework.apollo.common.dto                       
+apollo-portal                            com.ctrip.framework.apollo.common.dto.accesskeydto          
+apollo-portal                            com.ctrip.framework.apollo.common.dto.appdto                
+apollo-portal                            com.ctrip.framework.apollo.common.dto.appnamespacedto       
+apollo-portal                            com.ctrip.framework.apollo.common.dto.clusterdto            
+apollo-portal                            com.ctrip.framework.apollo.common.dto.commitdto             
+apollo-portal                            com.ctrip.framework.apollo.common.dto.grayreleaseruledto    
+apollo-portal                            com.ctrip.framework.apollo.common.dto.grayreleaseruleitemdto
+apollo-portal                            com.ctrip.framework.apollo.common.dto.instancedto           
+apollo-portal                            com.ctrip.framework.apollo.common.dto.itemchangesets        
+apollo-portal                            com.ctrip.framework.apollo.common.dto.itemdto               
+apollo-portal                            com.ctrip.framework.apollo.common.dto.namespacedto          
+apollo-portal                            com.ctrip.framework.apollo.common.dto.namespacelockdto      
+apollo-portal                            com.ctrip.framework.apollo.common.dto.pagedto               
+apollo-portal                            com.ctrip.framework.apollo.common.dto.releasedto            
+apollo-portal                            com.ctrip.framework.apollo.common.dto.releasehistorydto     
+apollo-portal                            com.ctrip.framework.apollo.common.entity.app                
+apollo-portal                            com.ctrip.framework.apollo.common.entity.appnamespace       
+apollo-portal                            com.ctrip.framework.apollo.common.entity.baseentity         
+apollo-portal                            com.ctrip.framework.apollo.common.entity.entitypair         
+apollo-portal                            com.ctrip.framework.apollo.common.exception.badrequestexception
+apollo-portal                            com.ctrip.framework.apollo.common.exception.notfoundexception
+apollo-portal                            com.ctrip.framework.apollo.common.exception.serviceexception
+apollo-portal                            com.ctrip.framework.apollo.common.http.multiresponseentity  
+apollo-portal                            com.ctrip.framework.apollo.common.http.richresponseentity   
+apollo-portal                            com.ctrip.framework.apollo.common.utils.beanutils           
+apollo-portal                            com.ctrip.framework.apollo.common.utils.inputvalidator      
+apollo-portal                            com.ctrip.framework.apollo.common.utils.requestprecondition 
+apollo-portal                            com.ctrip.framework.apollo.common.utils.requestprecondition.checkmodel
+apollo-portal                            com.ctrip.framework.apollo.core.configconsts                
+apollo-portal                            com.ctrip.framework.apollo.core.dto.servicedto              
+apollo-portal                            com.ctrip.framework.apollo.core.enums.configfileformat      
+apollo-portal                            com.ctrip.framework.apollo.core.utils.apollothreadfactory   
+apollo-portal                            com.ctrip.framework.apollo.core.utils.netutil               
+apollo-portal                            com.ctrip.framework.apollo.core.utils.propertiesutil        
+apollo-portal                            com.ctrip.framework.apollo.core.utils.resourceutils         
+apollo-portal                            com.ctrip.framework.apollo.core.utils.stringutils           
+apollo-portal                            com.ctrip.framework.apollo.openapi.auth.consumerpermissionvalidator
+apollo-portal                            com.ctrip.framework.apollo.openapi.dto.namespacegraydelreleasedto
+apollo-portal                            com.ctrip.framework.apollo.openapi.dto.namespacereleasedto  
+apollo-portal                            com.ctrip.framework.apollo.openapi.dto.openappdto           
+apollo-portal                            com.ctrip.framework.apollo.openapi.dto.openappnamespacedto  
+apollo-portal                            com.ctrip.framework.apollo.openapi.dto.openclusterdto       
+apollo-portal                            com.ctrip.framework.apollo.openapi.dto.openenvclusterdto    
+apollo-portal                            com.ctrip.framework.apollo.openapi.dto.opengrayreleaseruledto
+apollo-portal                            com.ctrip.framework.apollo.openapi.dto.opengrayreleaseruleitemdto
+apollo-portal                            com.ctrip.framework.apollo.openapi.dto.openitemdto          
+apollo-portal                            com.ctrip.framework.apollo.openapi.dto.opennamespacedto     
+apollo-portal                            com.ctrip.framework.apollo.openapi.dto.opennamespacelockdto 
+apollo-portal                            com.ctrip.framework.apollo.openapi.dto.openreleasedto       
+apollo-portal                            com.ctrip.framework.apollo.openapi.entity.consumer          
+apollo-portal                            com.ctrip.framework.apollo.openapi.entity.consumeraudit     
+apollo-portal                            com.ctrip.framework.apollo.openapi.entity.consumerrole      
+apollo-portal                            com.ctrip.framework.apollo.openapi.entity.consumertoken     
+apollo-portal                            com.ctrip.framework.apollo.openapi.filter.consumerauthenticationfilter
+apollo-portal                            com.ctrip.framework.apollo.openapi.portalopenapiconfig      
+apollo-portal                            com.ctrip.framework.apollo.openapi.repository.consumerauditrepository
+apollo-portal                            com.ctrip.framework.apollo.openapi.repository.consumerrepository
+apollo-portal                            com.ctrip.framework.apollo.openapi.repository.consumerrolerepository
+apollo-portal                            com.ctrip.framework.apollo.openapi.repository.consumertokenrepository
+apollo-portal                            com.ctrip.framework.apollo.openapi.service.consumerrolepermissionservice
+apollo-portal                            com.ctrip.framework.apollo.openapi.service.consumerservice  
+apollo-portal                            com.ctrip.framework.apollo.openapi.util.consumerauditutil   
+apollo-portal                            com.ctrip.framework.apollo.openapi.util.consumerauthutil    
+apollo-portal                            com.ctrip.framework.apollo.openapi.util.openapibeanutils    
+----------------------------------------------------------------------------------------------------
+
+
+ the service  is apollo-adminservice and the location servive imported is :
+-- apollo-core,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\AppController.java
+- apollo-common,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\AdminServiceApplication.java
+- apollo-biz,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\aop\NamespaceUnlockAspect.java
+- apollo-biz,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\NamespaceController.java
+- apollo-biz,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\ReleaseController.java
+- apollo-biz,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\NamespaceBranchController.java
+- apollo-common,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\aop\NamespaceUnlockAspect.java
+- apollo-common,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\NamespaceController.java
+- apollo-biz,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\AppNamespaceController.java
+- apollo-common,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\ReleaseController.java
+- apollo-biz,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\aop\NamespaceAcquireLockAspect.java
+- apollo-biz,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\ClusterController.java
+- apollo-common,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\NamespaceBranchController.java
+- apollo-common,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\AppNamespaceController.java
+- apollo-biz,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\ReleaseHistoryController.java
+- apollo-core,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\aop\NamespaceUnlockAspect.java
+- apollo-common,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\aop\NamespaceAcquireLockAspect.java
+- apollo-common,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\ClusterController.java
+- apollo-common,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\ReleaseHistoryController.java
+- apollo-biz,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\filter\AdminServiceAuthenticationFilter.java
+- apollo-core,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\AppNamespaceController.java
+- apollo-biz,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\CommitController.java
+- apollo-biz,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\AccessKeyController.java
+- apollo-biz,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\AdminServiceHealthIndicator.java
+- apollo-core,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\ClusterController.java
+- apollo-biz,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\ItemController.java
+- apollo-common,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\CommitController.java
+- apollo-common,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\AccessKeyController.java
+- apollo-biz,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\AdminServiceAutoConfiguration.java
+- apollo-biz,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\AppController.java
+- apollo-biz,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\InstanceConfigController.java
+- apollo-common,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\ItemController.java
+- apollo-biz,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\NamespaceLockController.java
+- apollo-common,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\AppController.java
+- apollo-common,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\InstanceConfigController.java
+- apollo-biz,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\ItemSetController.java
+- apollo-common,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\NamespaceLockController.java
+- apollo-biz,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\AdminServiceApplication.java
+- apollo-common,..\projects\apollo/apollo-adminservice\src\main\java\com\ctrip\framework\apollo\adminservice\controller\ItemSetController.java
+
+ *********************
+
+ the service  is apollo-assembly and the location servive imported is :
+-- apollo-configservice,..\projects\apollo/apollo-assembly\src\main\java\com\ctrip\framework\apollo\assembly\ApolloApplication.java
+- apollo-adminservice,..\projects\apollo/apollo-assembly\src\main\java\com\ctrip\framework\apollo\assembly\ApolloApplication.java
+- apollo-portal,..\projects\apollo/apollo-assembly\src\main\java\com\ctrip\framework\apollo\assembly\ApolloApplication.java
+
+ *********************
+
+ the service  is apollo-biz and the location servive imported is :
+-- apollo-core,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\service\ReleaseService.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\entity\Cluster.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\entity\GrayReleaseRule.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\entity\Privilege.java
+- apollo-core,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\message\DatabaseMessageSender.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\service\NamespaceService.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\entity\Commit.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\grayReleaseRule\GrayReleaseRuleCache.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\entity\Namespace.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\service\AccessKeyService.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\service\BizDBPropertySource.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\service\AppNamespaceService.java
+- apollo-core,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\service\NamespaceService.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\utils\ReleaseKeyGenerator.java
+- apollo-core,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\message\ReleaseMessageScanner.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\customize\BizLoggingCustomizer.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\entity\NamespaceLock.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\auth\WebSecurityConfig.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\config\BizConfig.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\service\ItemService.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\service\AdminService.java
+- apollo-core,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\service\BizDBPropertySource.java
+- apollo-core,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\service\AppNamespaceService.java
+- apollo-core,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\utils\ConfigChangeContentBuilder.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\service\AppService.java
+- apollo-core,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\service\ItemService.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\entity\ReleaseHistory.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\grayReleaseRule\GrayReleaseRulesHolder.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\repository\AppRepository.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\service\ClusterService.java
+- apollo-core,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\service\AdminService.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\repository\AppNamespaceRepository.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\entity\Audit.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\entity\Release.java
+- apollo-core,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\utils\ReleaseMessageKeyGenerator.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\entity\ServerConfig.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\service\ReleaseService.java
+- apollo-core,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\grayReleaseRule\GrayReleaseRulesHolder.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\service\NamespaceBranchService.java
+- apollo-core,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\service\ClusterService.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\entity\Item.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\service\ItemSetService.java
+- apollo-common,..\projects\apollo/apollo-biz\src\main\java\com\ctrip\framework\apollo\biz\entity\AccessKey.java
+
+ *********************
+
+ the service  is apollo-client and the location servive imported is :
+-- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\internals\YamlConfigFile.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\spring\spi\DefaultConfigPropertySourcesProcessorHelper.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\spi\ApolloInjectorCustomizer.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\internals\RemoteConfigLongPollService.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\util\ConfigUtil.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\spring\spi\ApolloConfigRegistrarHelper.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\ConfigFile.java
+- apollo-configservice,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\spi\DefaultConfigFactory.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\spring\annotation\EnableApolloConfig.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\internals\DefaultMetaServerProvider.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\internals\DefaultConfig.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\internals\YmlConfigFile.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\util\yaml\YamlParser.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\internals\PlainTextConfigFile.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\spring\annotation\ApolloConfig.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\spring\annotation\ApolloConfigChangeListener.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\spi\ConfigFactory.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\internals\AbstractConfig.java
+- apollo-configservice,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\spring\boot\ApolloApplicationContextInitializer.java
+- apollo-configservice,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\spring\annotation\ApolloAnnotationProcessor.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\spi\DefaultConfigFactory.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\internals\DefaultConfigManager.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\ConfigService.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\internals\JsonConfigFile.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\spring\boot\ApolloApplicationContextInitializer.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\internals\PropertiesConfigFile.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\spring\config\NamespaceHandler.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\internals\TxtConfigFile.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\internals\AbstractConfigFile.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\spring\spi\DefaultApolloConfigRegistrarHelper.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\internals\RemoteConfigRepository.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\spring\spi\ConfigPropertySourcesProcessorHelper.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\internals\LocalFileConfigRepository.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\internals\ConfigServiceLocator.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\internals\ConfigManager.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\spring\property\SpringValueRegistry.java
+- apollo-configservice,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\spring\config\PropertySourcesProcessor.java
+- apollo-core,..\projects\apollo/apollo-client\src\main\java\com\ctrip\framework\apollo\internals\XmlConfigFile.java
+
+ *********************
+
+ the service  is apollo-common and the location servive imported is :
+-- apollo-core,..\projects\apollo/apollo-common\src\main\java\com\ctrip\framework\apollo\common\entity\AppNamespace.java
+- apollo-core,..\projects\apollo/apollo-common\src\main\java\com\ctrip\framework\apollo\common\utils\UniqueKeyGenerator.java
+- apollo-core,..\projects\apollo/apollo-common\src\main\java\com\ctrip\framework\apollo\common\config\RefreshableConfig.java
+- apollo-core,..\projects\apollo/apollo-common\src\main\java\com\ctrip\framework\apollo\common\utils\RequestPrecondition.java
+- apollo-core,..\projects\apollo/apollo-common\src\main\java\com\ctrip\framework\apollo\common\datasource\TitanSettings.java
+- apollo-core,..\projects\apollo/apollo-common\src\main\java\com\ctrip\framework\apollo\common\datasource\TitanCondition.java
+- apollo-core,..\projects\apollo/apollo-common\src\main\java\com\ctrip\framework\apollo\common\utils\InputValidator.java
+
+ *********************
+
+ the service  is apollo-configservice and the location servive imported is :
+-- apollo-core,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\metaservice\controller\ServiceController.java
+- apollo-biz,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\controller\ConfigController.java
+- apollo-core,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\service\config\AbstractConfigService.java
+- apollo-core,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\metaservice\controller\HomePageController.java
+- apollo-biz,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\service\config\ConfigServiceWithCache.java
+- apollo-biz,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\service\config\ConfigService.java
+- apollo-common,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\controller\ConfigController.java
+- apollo-biz,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\util\InstanceConfigAuditUtil.java
+- apollo-common,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\util\NamespaceUtil.java
+- apollo-core,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\service\config\DefaultConfigService.java
+- apollo-biz,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\controller\NotificationControllerV2.java
+- apollo-biz,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\controller\NotificationController.java
+- apollo-biz,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\metaservice\service\KubernetesDiscoveryService.java
+- apollo-biz,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\service\AppNamespaceServiceWithCache.java
+- apollo-core,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\wrapper\DeferredResultWrapper.java
+- apollo-core,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\filter\ClientAuthenticationFilter.java
+- apollo-core,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\controller\ConfigController.java
+- apollo-biz,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\service\ReleaseMessageServiceWithCache.java
+- apollo-common,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\controller\NotificationControllerV2.java
+- apollo-core,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\service\config\ConfigServiceWithCache.java
+- apollo-common,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\service\AppNamespaceServiceWithCache.java
+- apollo-biz,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\ConfigServiceAutoConfiguration.java
+- apollo-biz,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\ConfigServiceApplication.java
+- apollo-core,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\service\config\ConfigService.java
+- apollo-core,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\util\InstanceConfigAuditUtil.java
+- apollo-biz,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\controller\ConfigFileController.java
+- apollo-biz,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\ConfigServiceHealthIndicator.java
+- apollo-core,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\controller\NotificationController.java
+- apollo-common,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\ConfigServiceApplication.java
+- apollo-core,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\controller\NotificationControllerV2.java
+- apollo-core,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\util\AccessKeyUtil.java
+- apollo-core,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\service\AppNamespaceServiceWithCache.java
+- apollo-common,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\util\WatchKeysUtil.java
+- apollo-biz,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\service\AccessKeyServiceWithCache.java
+- apollo-core,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\metaservice\service\KubernetesDiscoveryService.java
+- apollo-common,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\metaservice\service\DefaultDiscoveryService.java
+- apollo-core,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\metaservice\service\NacosDiscoveryService.java
+- apollo-core,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\service\ReleaseMessageServiceWithCache.java
+- apollo-core,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\metaservice\service\ConsulDiscoveryService.java
+- apollo-biz,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\service\config\AbstractConfigService.java
+- apollo-core,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\controller\ConfigFileController.java
+- apollo-core,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\metaservice\service\DiscoveryService.java
+- apollo-core,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\util\WatchKeysUtil.java
+- apollo-core,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\metaservice\service\DefaultDiscoveryService.java
+- apollo-biz,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\service\config\DefaultConfigService.java
+- apollo-core,..\projects\apollo/apollo-configservice\src\main\java\com\ctrip\framework\apollo\configservice\service\AccessKeyServiceWithCache.java
+
+ *********************
+
+ the service  is apollo-demo and the location servive imported is :
+-- apollo-core,..\projects\apollo/apollo-demo\src\main\java\com\ctrip\framework\apollo\demo\api\ApolloConfigDemo.java
+- apollo-configservice,..\projects\apollo/apollo-demo\src\main\java\com\ctrip\framework\apollo\demo\api\ApolloConfigDemo.java
+- apollo-core,..\projects\apollo/apollo-demo\src\main\java\com\ctrip\framework\apollo\demo\spring\springBootDemo\refresh\SpringBootApolloRefreshConfig.java
+- apollo-configservice,..\projects\apollo/apollo-demo\src\main\java\com\ctrip\framework\apollo\demo\api\SimpleApolloConfigDemo.java
+
+ *********************
+
+ the service  is apollo-mockserver and the location servive imported is :
+-- apollo-core,..\projects\apollo/apollo-mockserver\src\main\java\com\ctrip\framework\apollo\mockserver\EmbeddedApollo.java
+
+ *********************
+
+ the service  is apollo-openapi and the location servive imported is :
+-- apollo-core,..\projects\apollo/apollo-openapi\src\main\java\com\ctrip\framework\apollo\openapi\client\service\ClusterOpenApiService.java
+- apollo-core,..\projects\apollo/apollo-openapi\src\main\java\com\ctrip\framework\apollo\openapi\client\service\ReleaseOpenApiService.java
+- apollo-core,..\projects\apollo/apollo-openapi\src\main\java\com\ctrip\framework\apollo\openapi\client\service\ItemOpenApiService.java
+- apollo-core,..\projects\apollo/apollo-openapi\src\main\java\com\ctrip\framework\apollo\openapi\client\service\NamespaceOpenApiService.java
+
+ *********************
+
+ the service  is apollo-portal and the location servive imported is :
+-- apollo-openapi,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\v1\controller\NamespaceBranchController.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\component\ItemsComparator.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\service\AppService.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\service\ConfigsImportService.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\entity\vo\EnvironmentInfo.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\controller\NamespaceBranchController.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\util\ConfigFileUtils.java
+- apollo-openapi,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\PortalApplication.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\spi\configuration\EmailConfiguration.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\component\emailbuilder\ConfigPublishEmailBuilder.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\component\txtresolver\FileTextResolver.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\v1\controller\NamespaceController.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\controller\ItemController.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\entity\vo\ItemDiffs.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\spi\ctrip\CtripMQService.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\entity\bo\NamespaceBO.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\v1\controller\ReleaseController.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\listener\AppNamespaceCreationEvent.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\controller\ConsumerController.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\controller\InstanceController.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\listener\AppCreationEvent.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\service\AccessKeyService.java
+- apollo-openapi,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\spi\defaultimpl\DefaultRolePermissionService.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\controller\AppController.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\component\txtresolver\PropertyResolver.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\component\emailbuilder\GrayPublishEmailBuilder.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\service\ReleaseService.java
+- apollo-openapi,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\v1\controller\ItemController.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\entity\bo\ConfigBO.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\environment\Env.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\v1\controller\AppController.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\spi\configuration\AuthConfiguration.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\service\InstanceService.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\service\NamespaceService.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\util\NamespaceBOUtils.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\service\AppNamespaceService.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\entity\po\Role.java
+- apollo-openapi,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\filter\ConsumerAuthenticationFilter.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\controller\ClusterController.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\controller\ConfigsExportController.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\v1\controller\ClusterController.java
+- apollo-openapi,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\v1\controller\NamespaceController.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\entity\vo\Change.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\listener\CreationListener.java
+- apollo-openapi,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\repository\ConsumerRoleRepository.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\entity\vo\ReleaseCompareResult.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\api\AdminServiceAPI.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\service\ConfigsExportService.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\controller\UserInfoController.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\entity\bo\ReleaseBO.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\listener\AppNamespaceDeletionEvent.java
+- apollo-openapi,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\controller\ConsumerController.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\entity\model\AppModel.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\component\RetryableRestTemplate.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\entity\po\ServerConfig.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\controller\CommitController.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\environment\PortalMetaDomainService.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\component\emailbuilder\ConfigPublishEmailBuilder.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\entity\ConsumerRole.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\component\config\PortalConfig.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\util\RoleUtils.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\util\ConsumerAuditUtil.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\controller\ItemController.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\entity\model\NamespaceSyncModel.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\entity\Consumer.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\listener\AppInfoChangedListener.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\controller\PermissionController.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\v1\controller\ItemController.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\controller\NamespaceController.java
+- apollo-openapi,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\v1\controller\ClusterController.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\controller\AppController.java
+- apollo-openapi,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\repository\ConsumerTokenRepository.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\controller\NamespaceLockController.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\service\ReleaseService.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\service\ItemService.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\controller\AccessKeyController.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\v1\controller\NamespaceBranchController.java
+- apollo-openapi,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\util\ConsumerAuthUtil.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\spi\configuration\AuthConfiguration.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\service\NamespaceBranchService.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\spi\defaultimpl\DefaultRoleInitializationService.java
+- apollo-openapi,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\service\ConsumerService.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\entity\po\RolePermission.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\service\NamespaceService.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\listener\ConfigPublishListener.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\entity\vo\NamespaceIdentifier.java
+- apollo-openapi,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\spi\configuration\AuthFilterConfiguration.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\PortalApplication.java
+- apollo-openapi,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\v1\controller\ReleaseController.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\environment\DefaultPortalMetaServerProvider.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\controller\ConsumerController.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\entity\model\NamespaceCreationModel.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\service\ConfigsExportService.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\controller\ReleaseController.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\service\PortalDBPropertySource.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\controller\ServerConfigController.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\entity\bo\ReleaseHistoryBO.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\entity\model\NamespaceTextModel.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\listener\AppInfoChangedEvent.java
+- apollo-openapi,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\service\ConsumerRolePermissionService.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\component\RetryableRestTemplate.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\component\AdminServiceAddressLocator.java
+- apollo-openapi,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\auth\ConsumerPermissionValidator.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\spi\configuration\MQConfiguration.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\component\ItemsComparator.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\component\txtresolver\ConfigTextResolver.java
+- apollo-openapi,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\util\OpenApiBeanUtils.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\entity\po\UserRole.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\listener\DeletionListener.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\entity\bo\ItemBO.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\repository\AppRepository.java
+- apollo-openapi,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\repository\ConsumerAuditRepository.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\v1\controller\ItemController.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\util\ConfigFileUtils.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\service\ConsumerService.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\component\txtresolver\FileTextResolver.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\v1\controller\NamespaceController.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\service\CommitService.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\repository\AppNamespaceRepository.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\service\ItemService.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\v1\controller\NamespaceBranchController.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\v1\controller\ReleaseController.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\spi\defaultimpl\DefaultRoleInitializationService.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\spi\oidc\OidcLocalUserService.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\entity\po\Favorite.java
+- apollo-openapi,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\repository\ConsumerRepository.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\entity\vo\EnvClusterInfo.java
+- apollo-openapi,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\util\ConsumerAuditUtil.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\listener\ConfigPublishListener.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\service\FavoriteService.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\component\PortalSettings.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\component\PermissionValidator.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\spi\springsecurity\SpringSecurityUserService.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\controller\UserInfoController.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\controller\SystemInfoController.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\spi\ctrip\BizLoggingCustomizer.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\entity\ConsumerToken.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\entity\model\NamespaceReleaseModel.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\service\ClusterService.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\service\ReleaseHistoryService.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\listener\AppDeletionEvent.java
+- apollo-core,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\controller\ConfigsImportController.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\util\OpenApiBeanUtils.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\service\AppNamespaceService.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\controller\ConfigsExportController.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\v1\controller\ClusterController.java
+- apollo-openapi,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\openapi\v1\controller\AppController.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\entity\po\Permission.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\service\RoleInitializationService.java
+- apollo-common,..\projects\apollo/apollo-portal\src\main\java\com\ctrip\framework\apollo\portal\service\NamespaceLockService.java
+
+ *********************
+
+===================================================================================
+
+#5
+Anti-Pattern Name: Hardcoded Endpoints
+
+| Anti-Pattern        | Status   |
+|---------------------|----------|
+| Hardcoded Endpoints | ======== |
+
+- Service `apollo-mockserver` has hardcoded HTTP URLs:
+  - http://localhost:, path: ..\projects\apollo/apollo-mockserver\src\main\java\com\ctrip\framework\apollo\mockserver\EmbeddedApollo.java
+
+- Service `apollo-portal` has hardcoded HTTP URLs:
+  - http://localhost:8080, path: ..\projects\apollo/apollo-portal\src\main\resources\apollo-env.properties
+
+- Service `apollo-portal` has hardcoded HTTP URLs:
+  - https://host:port/auth/realms/apollo/.well-known/openid-configuration,, path: ..\projects\apollo/apollo-portal\src\main\config\application-oidc-sample.yml
+
+- Service `apollo-portal` has hardcoded HTTP URLs:
+  - https://host:port/auth/realms/apollo, path: ..\projects\apollo/apollo-portal\src\main\config\application-oidc-sample.yml
+
+- Service `apollo-portal` has hardcoded HTTP URLs:
+  - https://host:port/auth/realms/apollo, path: ..\projects\apollo/apollo-portal\src\main\config\application-oidc-sample.yml
+
+- System has hardcoded HTTP URLs:
+
+  - http://localhost:8080/eureka/, path: 
+  - http://localhost:8080/eureka/, path: 
+  - http://apollo-configservice-dev:8080, path: 
+  - http://apollo-configservice-pro:8080, path: 
+  - http://localhost:8080/eureka/, path: 
+
+ **System-level Tools**:
+- eureka-client
+- spring-cloud-starter-netflix-eureka-client
+
+--------------------------------------------------------
+
+
+===================================================================================
+
+#6
+Anti-Pattern Name: Manual Configuration
+
+| Anti-Pattern         | Status       |
+|----------------------|--------------|
+| Manual Configuration | Detected     |
+
+===================================================================================
+
+#7
+Anti-Pattern Name: NoCICD (Missing CI/CD Pipeline)
+
+| Anti-Pattern | Status   |
+|--------------|----------|
+| NoCICD       | Detected |
+
+
+ - The system lacks any CI/CD pipeline tools.
+
+===================================================================================
+
+#8
+Anti-Pattern Name: No API Gateway (NAG)
+
+| Anti-Pattern         | Status       |
+|----------------------|--------------|
+| No API Gateway (NAG) | Detected     |
+
+
+No API Gateway tools were detected in the system
+
+
+===================================================================================
+
+#9
+Anti-Pattern Name: Timeouts (TO)
+
+| Anti-Pattern         | Status       |
+|----------------------|--------------|
+| Timeouts (TO)        | Detected     |
+
+- The Timeout pattern was identified at the service level.
+
+Service: apollo-portal
+  - Timeout Imports:
+    - java.net.SocketTimeoutException
+    - org.apache.http.conn.ConnectTimeoutException
+  - Timeout Methods:
+    - connectTimeout
+    - readTimeout
+
+---
+
+===================================================================================
+
+#10
+Anti-Pattern Name: Multiple Services Per Host (MSPH)
+
+| Anti-Pattern                     | Status       |
+|----------------------------------|--------------|
+| Multiple Services Per Host (MSPH)| Not detected |
+
+
+- The system includes a docker-compose file.
+- service apollo-adminservice has a Dockerfile
+- service apollo-configservice has a Dockerfile
+- service apollo-portal has a Dockerfile
+
+===================================================================================
+
+#11
+Anti-Pattern Name: Shared Persistence
+
+| Anti-Pattern         | Status       |
+|----------------------|--------------|
+| Shared Persistence   | Not detected |
+
+
+- No shared databases were found among the microservices.
+===================================================================================
+
+#12
+Anti-Pattern Name: No API Versioning
+
+| Anti-Pattern         | Status       |
+|----------------------|--------------|
+| No API Versioning    | Not detected |
+
+
+- The API versioning tool in the system level was detected.
+
+ API Version found in ..\projects\apollo\docs\charts\index.yaml as apiVersion: v1
+ API Version found in ..\projects\apollo\docs\charts\index.yaml as - apiVersion: v2
+ API Version found in ..\projects\apollo\scripts\apollo-on-kubernetes\kubernetes\service-apollo-portal-server.yaml as apiVersion: v1
+ API Version found in ..\projects\apollo\scripts\apollo-on-kubernetes\kubernetes\service-apollo-portal-server.yaml as apiVersion: apps/v1
+ API Version found in ..\projects\apollo\scripts\apollo-on-kubernetes\kubernetes\apollo-env-dev\service-apollo-admin-server-dev.yaml as apiVersion: v1
+ API Version found in ..\projects\apollo\scripts\apollo-on-kubernetes\kubernetes\apollo-env-dev\service-apollo-admin-server-dev.yaml as apiVersion: apps/v1
+ API Version found in ..\projects\apollo\scripts\apollo-on-kubernetes\kubernetes\apollo-env-dev\service-apollo-config-server-dev.yaml as apiVersion: v1
+ API Version found in ..\projects\apollo\scripts\apollo-on-kubernetes\kubernetes\apollo-env-dev\service-apollo-config-server-dev.yaml as apiVersion: apps/v1
+ API Version found in ..\projects\apollo\scripts\apollo-on-kubernetes\kubernetes\apollo-env-dev\service-mysql-for-apollo-dev-env.yaml as apiVersion: v1
+ API Version found in ..\projects\apollo\scripts\apollo-on-kubernetes\kubernetes\apollo-env-prod\service-apollo-admin-server-prod.yaml as apiVersion: v1
+ API Version found in ..\projects\apollo\scripts\apollo-on-kubernetes\kubernetes\apollo-env-prod\service-apollo-admin-server-prod.yaml as apiVersion: apps/v1
+ API Version found in ..\projects\apollo\scripts\apollo-on-kubernetes\kubernetes\apollo-env-prod\service-apollo-config-server-prod.yaml as apiVersion: v1
+ API Version found in ..\projects\apollo\scripts\apollo-on-kubernetes\kubernetes\apollo-env-prod\service-apollo-config-server-prod.yaml as apiVersion: apps/v1
+ API Version found in ..\projects\apollo\scripts\apollo-on-kubernetes\kubernetes\apollo-env-prod\service-mysql-for-apollo-prod-env.yaml as apiVersion: v1
+ API Version found in ..\projects\apollo\scripts\apollo-on-kubernetes\kubernetes\apollo-env-test-alpha\service-apollo-admin-server-test-alpha.yaml as apiVersion: v1
+ API Version found in ..\projects\apollo\scripts\apollo-on-kubernetes\kubernetes\apollo-env-test-alpha\service-apollo-admin-server-test-alpha.yaml as apiVersion: apps/v1
+ API Version found in ..\projects\apollo\scripts\apollo-on-kubernetes\kubernetes\apollo-env-test-alpha\service-apollo-config-server-test-alpha.yaml as apiVersion: v1
+ API Version found in ..\projects\apollo\scripts\apollo-on-kubernetes\kubernetes\apollo-env-test-alpha\service-apollo-config-server-test-alpha.yaml as apiVersion: apps/v1
+ API Version found in ..\projects\apollo\scripts\apollo-on-kubernetes\kubernetes\apollo-env-test-alpha\service-mysql-for-apollo-test-alpha-env.yaml as apiVersion: v1
+ API Version found in ..\projects\apollo\scripts\apollo-on-kubernetes\kubernetes\apollo-env-test-beta\service-apollo-admin-server-test-beta.yaml as apiVersion: v1
+ API Version found in ..\projects\apollo\scripts\apollo-on-kubernetes\kubernetes\apollo-env-test-beta\service-apollo-admin-server-test-beta.yaml as apiVersion: apps/v1
+ API Version found in ..\projects\apollo\scripts\apollo-on-kubernetes\kubernetes\apollo-env-test-beta\service-apollo-config-server-test-beta.yaml as apiVersion: v1
+ API Version found in ..\projects\apollo\scripts\apollo-on-kubernetes\kubernetes\apollo-env-test-beta\service-apollo-config-server-test-beta.yaml as apiVersion: apps/v1
+ API Version found in ..\projects\apollo\scripts\apollo-on-kubernetes\kubernetes\apollo-env-test-beta\service-mysql-for-apollo-test-beta-env.yaml as apiVersion: v1
+ API Version found in ..\projects\apollo\scripts\helm\apollo-portal\Chart.yaml as apiVersion: v2
+ API Version found in ..\projects\apollo\scripts\helm\apollo-portal\templates\deployment-portal.yaml as apiVersion: v1
+ API Version found in ..\projects\apollo\scripts\helm\apollo-portal\templates\deployment-portal.yaml as apiVersion: apps/v1
+ API Version found in ..\projects\apollo\scripts\helm\apollo-portal\templates\ingress-portal.yaml as apiVersion: networking.k8s.io/v1beta1
+ API Version found in ..\projects\apollo\scripts\helm\apollo-portal\templates\ingress-portal.yaml as apiVersion: extensions/v1beta1
+ API Version found in ..\projects\apollo\scripts\helm\apollo-portal\templates\service-portal.yaml as apiVersion: v1
+ API Version found in ..\projects\apollo\scripts\helm\apollo-portal\templates\service-portaldb.yaml as apiVersion: v1
+ API Version found in ..\projects\apollo\scripts\helm\apollo-service\Chart.yaml as apiVersion: v2
+ API Version found in ..\projects\apollo\scripts\helm\apollo-service\templates\deployment-adminservice.yaml as apiVersion: v1
+ API Version found in ..\projects\apollo\scripts\helm\apollo-service\templates\deployment-adminservice.yaml as apiVersion: apps/v1
+ API Version found in ..\projects\apollo\scripts\helm\apollo-service\templates\deployment-configservice.yaml as apiVersion: v1
+ API Version found in ..\projects\apollo\scripts\helm\apollo-service\templates\deployment-configservice.yaml as apiVersion: apps/v1
+ API Version found in ..\projects\apollo\scripts\helm\apollo-service\templates\ingress-adminservice.yaml as apiVersion: networking.k8s.io/v1beta1
+ API Version found in ..\projects\apollo\scripts\helm\apollo-service\templates\ingress-adminservice.yaml as apiVersion: extensions/v1beta1
+ API Version found in ..\projects\apollo\scripts\helm\apollo-service\templates\ingress-configservice.yaml as apiVersion: networking.k8s.io/v1beta1
+ API Version found in ..\projects\apollo\scripts\helm\apollo-service\templates\ingress-configservice.yaml as apiVersion: extensions/v1beta1
+ API Version found in ..\projects\apollo\scripts\helm\apollo-service\templates\service-adminservice.yaml as apiVersion: v1
+ API Version found in ..\projects\apollo\scripts\helm\apollo-service\templates\service-configdb.yaml as apiVersion: v1
+ API Version found in ..\projects\apollo\scripts\helm\apollo-service\templates\service-configservice.yaml as apiVersion: v1
+- The uri versioning in the system level was detected.
+
+ uri Version found in /notifications/v2
+
+===================================================================================
+
+#13
+Anti-Pattern Name: No Health Check
+
+| Anti-Pattern     | Status       |
+|------------------|--------------|
+| No Health Check  | Not detected |
+
+
+- In service apollo-common, Health Check was observed in the  ['spring-boot-starter-actuator'].
+
+
+===================================================================================
+
+#14
+Anti-Pattern Name: Local Logging (LL)
+
+| Anti-Pattern        | Status       |
+|---------------------|--------------|
+| Local Logging (LL)  | Not detected |
+
+
+- Centralized Logging tool in the system level was detected.
+    ** Centralized Logging tool found in guava.
+
+- Centralized Logging tool in the service level was detected.
+    ** In service apollo-core, Centralized Logging was observed in the ['guava'].
+
+
+ *****************Aditional Information****************- Local Logging antipattern in the system level was detected.
+    ** Local Logging tool found in logback-classic.
+    ** Local Logging tool found in slf4j-api.
+
+- Local Logging tool in the service level was detected.
+    ** In service apollo-adminservice:
+         -Local Logging was observed in the ['org.slf4j.Logger', 'org.slf4j.LoggerFactory'] imports.
+
+
+    ** In service apollo-assembly:
+         -Local Logging was observed in the ['org.slf4j.Logger', 'org.slf4j.LoggerFactory'] imports.
+
+
+    ** In service apollo-biz:
+         -Local Logging was observed in the ['org.slf4j.Logger', 'org.slf4j.LoggerFactory'] imports.
+
+
+    ** In service apollo-client:
+         -Local Logging was observed in the ['log4j', 'log4j-core', 'slf4j-api'] dependencies.
+        -Local Logging was observed in the ['org.slf4j.Logger', 'org.slf4j.LoggerFactory'] imports.
+
+
+    ** In service apollo-common:
+         -Local Logging was observed in the ['org.slf4j.Logger', 'org.slf4j.LoggerFactory'] imports.
+
+
+    ** In service apollo-configservice:
+         -Local Logging was observed in the ['org.slf4j.Logger', 'org.slf4j.LoggerFactory'] imports.
+
+
+    ** In service apollo-core:
+         -Local Logging was observed in the ['log4j', 'log4j-core', 'slf4j-api'] dependencies.
+        -Local Logging was observed in the ['org.slf4j.Logger', 'org.slf4j.LoggerFactory'] imports.
+
+
+    ** In service apollo-demo:
+         -Local Logging was observed in the ['log4j', 'log4j-api', 'log4j-core', 'spring-boot-starter-log4j2'] dependencies.
+        -Local Logging was observed in the ['org.slf4j.Logger', 'org.slf4j.LoggerFactory'] imports.
+
+
+    ** In service apollo-mockserver:
+         -Local Logging was observed in the ['org.slf4j.Logger', 'org.slf4j.LoggerFactory'] imports.
+
+
+    ** In service apollo-openapi:
+         -Local Logging was observed in the ['log4j', 'log4j-core'] dependencies.
+
+
+    ** In service apollo-portal:
+         -Local Logging was observed in the ['org.slf4j.Logger', 'org.slf4j.LoggerFactory'] imports.
+
+
+
+===================================================================================
+
+#15
+Anti-Pattern Name: Insufficient Monitoring
+
+| Anti-Pattern            | Status       |
+|-------------------------|--------------|
+| Insufficient Monitoring | Not detected |
+
+
+
+- Monitoring tool in the service level was detected.
+    ** In service apollo-common, Monitoring was observed in the ['micrometer-registry-prometheus', 'prometheus', 'spring-boot-starter-actuator'].
+
+===================================================================================
+

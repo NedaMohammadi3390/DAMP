@@ -1,0 +1,13 @@
+*.properties
+*.cnf
+*.conf
+*.sql
+*.yml
+*.yaml
+**/application*.properties
+**/application*.yml
+**/bootstrap*.properties
+**/bootstrap*.yml
+**/*.xml
+**/.env
+

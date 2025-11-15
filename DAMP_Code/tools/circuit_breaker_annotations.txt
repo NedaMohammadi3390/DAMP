@@ -1,0 +1,6 @@
+CircuitBreaker
+Retry
+EnableCircuitBreaker
+HystrixCommand
+EnableHystrix
+SentinelResource

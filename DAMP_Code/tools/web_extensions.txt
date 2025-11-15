@@ -1,0 +1,17 @@
+js
+ts
+graphql
+x
+vue
+cs
+vss
+css
+proto
+html
+json
+xml
+eot
+woff
+woff2
+regular
+min

@@ -1,0 +1,98 @@
+[
+    {
+        "type": "maven",
+        "group": "org.springframework.security",
+        "artifact": "spring-security-ldap",
+        "version": ""
+    },
+    {
+        "type": "maven",
+        "group": "com.ctrip.framework.apollo",
+        "artifact": "apollo-common",
+        "version": ""
+    },
+    {
+        "type": "maven",
+        "group": "com.ctrip.framework.apollo",
+        "artifact": "apollo-openapi",
+        "version": ""
+    },
+    {
+        "type": "maven",
+        "group": "org.springframework.boot",
+        "artifact": "spring-boot-starter-oauth2-client",
+        "version": ""
+    },
+    {
+        "type": "maven",
+        "group": "org.springframework.boot",
+        "artifact": "spring-boot-starter-oauth2-resource-server",
+        "version": ""
+    },
+    {
+        "type": "maven",
+        "group": "org.yaml",
+        "artifact": "snakeyaml",
+        "version": ""
+    },
+    {
+        "type": "maven",
+        "group": "javax.xml.bind",
+        "artifact": "jaxb-api",
+        "version": ""
+    },
+    {
+        "type": "maven",
+        "group": "com.sun.xml.bind",
+        "artifact": "jaxb-impl",
+        "version": ""
+    },
+    {
+        "type": "maven",
+        "group": "org.glassfish.jaxb",
+        "artifact": "jaxb-runtime",
+        "version": ""
+    },
+    {
+        "type": "maven",
+        "group": "javax.activation",
+        "artifact": "activation",
+        "version": ""
+    },
+    {
+        "type": "maven",
+        "group": "com.sun.mail",
+        "artifact": "javax.mail",
+        "version": ""
+    },
+    {
+        "type": "maven",
+        "group": "org.javassist",
+        "artifact": "javassist",
+        "version": ""
+    },
+    {
+        "type": "maven",
+        "group": "com.h2database",
+        "artifact": "h2",
+        "version": ""
+    },
+    {
+        "type": "maven",
+        "group": "org.eclipse.jetty",
+        "artifact": "jetty-server",
+        "version": ""
+    },
+    {
+        "type": "maven",
+        "group": "com.ctrip.framework.apollo-sso",
+        "artifact": "apollo-sso-ctrip",
+        "version": ""
+    },
+    {
+        "type": "maven",
+        "group": "com.ctrip.framework.apollo-ctrip-service",
+        "artifact": "apollo-email-service",
+        "version": ""
+    }
+]

@@ -1,0 +1,17 @@
+Service
+Component
+Repository
+Transactional
+Bean
+Async
+Scheduled
+EnableAsync
+EnableScheduling
+PostConstruct
+PreDestroy
+Cacheable
+CachePut
+CacheEvict
+EnableCaching
+EventListener
+ApplicationListener

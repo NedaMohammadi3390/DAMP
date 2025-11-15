@@ -1,0 +1,11 @@
+jenkins
+jenkins-core
+gitlab-ci
+circleci
+circleci.test
+azure-pipelines
+bitbucket-pipelines
+concourse-ci
+docker build
+cf push
+kubectl apply

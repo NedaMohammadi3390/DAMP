@@ -1,0 +1,17 @@
+*.properties
+*.cnf
+*.conf
+*.sql
+*.yml
+*.yaml
+*.xml
+Jenkinsfile 
+.github/workflows/*.yml
+.gitlab-ci.yml
+.circleci/config.yml
+.travis.yml
+azure-pipelines.yml
+bitbucket-pipelines.yml
+.drone.yml
+buildkite.yml
+.buildkite/pipeline.yml
