@@ -10,22 +10,6 @@ This repository also serves as the **replication package** for our study, enabli
 
 ---
 
-## 📘 Table of Contents
-- [Overview](#-overview)
-- [Features](#-features)
-- [Repository Structure](#-repository-structure)
-- [Installation](#-installation)
-- [How to Run](#-how-to-run)
-  - [1. Run Extractor](#1-run-extractor)
-  - [2. Run Detector](#2-run-detector)
-- [Replication Package](#-replication-package)
-- [Sample Output](#-sample-output)
-- [Citing DAMP](#-citing-damp)
-- [Contributing](#-contributing)
-- [Contact](#-contact)
-
----
-
 ## 📖 Overview
 
 DAMP provides:
@@ -57,12 +41,10 @@ DAMP provides:
 ```
 DAMP/
 ├── Extractor/
-│   ├── src/
-│   └── (code for extracting meta-models)
+│   ├──  (code for extracting meta-models)
 │
 ├── Detector/
-│   ├── rules/
-│   └── (antipattern detection logic)
+│   ├── (antipattern detection logic)
 │
 ├── projects/
 │   └── apollo/   (sample system for replication)
