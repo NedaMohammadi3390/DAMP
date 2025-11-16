@@ -1,10 +1,5 @@
 # 🚀 DAMP: Detection of Anti-Patterns in Microservices
 
-[![License](https://img.shields.io/badge/License-MIT-green.svg)]()
-[![Build](https://img.shields.io/badge/build-passing-brightgreen)]()
-[![Java](https://img.shields.io/badge/Java-1.8-blue)]()
-[![Platform](https://img.shields.io/badge/platform-Java%2FCLI-lightgrey)]()
-
 DAMP is an automated analysis tool for extracting architectural information from microservice-based systems and detecting **15 microservice antipatterns**.  
 This repository also serves as the **replication package** for our study, enabling other researchers to reproduce all experiments end-to-end.
 
