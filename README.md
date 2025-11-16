@@ -51,6 +51,20 @@ DAMP provides:
   The *Apollo* system is included for direct execution.
 
 ---
+DAMP/
+├── Extractor/
+│ ├── src/
+│ └── (code for extracting meta-models)
+│
+├── Detector/
+│ ├── rules/
+│ └── (antipattern detection logic)
+│
+├── projects/
+│ └── apollo/ (sample system for replication)
+│
+└── result-of-analysis/
+└── (generated meta-models and detection reports)
 
 ## 📁 Repository Structure
 
