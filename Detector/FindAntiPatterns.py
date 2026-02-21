@@ -1,6 +1,13 @@
 from collections import defaultdict
+import yaml
+import math
 
 vars = dict()
+
+# خواندن فایل کانفیگ
+with open("thresholds_config.yaml", "r") as f:
+    config = yaml.safe_load(f)
+
 def generalInformation(metamodel, apd_Detected ):
     apd_Detected['GeneralInformation'] = {
         'number of services': 0,
@@ -55,6 +62,7 @@ def WrongCuts(metamodel, apd_Detected):
 
     microservices = metamodel["system"]["microservices"]
 
+    web_ratio = config["wrongcuts_thresholds"]["web_ratio"]
     for service in microservices:
         sFiles = service["code"]["source_files"]
         number_files = len(sFiles)
@@ -72,7 +80,8 @@ def WrongCuts(metamodel, apd_Detected):
             if ext in tools_web:
                 cpt += count
 
-        if cpt > 1 and cpt >= number_files * 0.8 and service["name"] not in flag_folders:
+
+        if cpt > config["wrongcuts_thresholds"]["min_count"] and cpt >= number_files * web_ratio and service["name"] not in flag_folders:
             flag_folders.append(service["name"])
             apd_Detected['WrongCuts']['hasWrongCuts'] = True
             apd_Detected['WrongCuts']['services'].append({
@@ -165,7 +174,7 @@ def megaService(metamodel, apd_Detected):
         'hasMegaService': False,
         'characteristics of mega services': []
     }
-
+    thresholds = config["megaService_thresholds"]
     totalAPI = 0
     apiServices = []
 
@@ -180,8 +189,6 @@ def megaService(metamodel, apd_Detected):
         })
         totalAPI += num_api
 
-    requiredLocs = vars["total LOCs"] * 0.39
-
     mega_services = []
 
     for s in apiServices:
@@ -190,11 +197,12 @@ def megaService(metamodel, apd_Detected):
         files = s['nbFiles']
         num_api = s['number api']
 
+        requiredLocs = vars["total LOCs"] * thresholds["loc_ratio"]
         hasMoreLocsThanAvg = locs > requiredLocs
         isNotDemoOrCommand = "demo" not in name.lower() and "command" not in name.lower()
         api_ratio = num_api / totalAPI if totalAPI > 0 else 0
 
-        if hasMoreLocsThanAvg and isNotDemoOrCommand and api_ratio > 0.2:
+        if hasMoreLocsThanAvg and isNotDemoOrCommand and api_ratio > thresholds["api_ratio"]:
             apd_Detected['megaService']['hasMegaService'] = True
             mega_services.append({
                 'service name': name,
@@ -222,6 +230,7 @@ def nanoService(metamodel, apd_Detected):
         'characteristics of nano services': []
     }
 
+    thresholds = config["nanoService_thresholds"]
     totalAPI = 0
     for s in metamodel["system"]["microservices"]:
         totalAPI += s["code"]["APIs"]["number"]
@@ -229,11 +238,9 @@ def nanoService(metamodel, apd_Detected):
     with open("../tools/name_ban_for_nano_services.txt", "r") as confTools:
         tools = [line.strip() for line in confTools if line.strip()]
 
-    NANO_SERVICE_LOC_THRESHOLD = 0.2
-    NANO_SERVICE_FILES_THRESHOLD = 0.2
 
-    requiredLocs = math.floor(NANO_SERVICE_LOC_THRESHOLD * vars["average LOCs"])
-    requiredFiles = math.floor(NANO_SERVICE_FILES_THRESHOLD * vars["average files"])
+    requiredLocs = math.floor(thresholds["loc_ratio"] * vars["average LOCs"])
+    requiredFiles = math.floor(thresholds["files_ratio"] * vars["average files"])
 
     for s in metamodel["system"]["microservices"]:
         name = s['name']
@@ -245,7 +252,7 @@ def nanoService(metamodel, apd_Detected):
         hasLessFilesThanAvg = int(s["nb_files"]) < requiredFiles
         ratio = num_api / totalAPI if totalAPI > 0 else 0
 
-        if (hasLessLocsThanAvg  and ratio <= 0.03 and not red_flag_service_name):
+        if (hasLessLocsThanAvg  and ratio <= thresholds["api_ratio"] and not red_flag_service_name):
             apd_Detected['nanoService']['hasNanoService'] = True
             apd_Detected['nanoService']["characteristics of nano services"].append({
                 "service name": name,

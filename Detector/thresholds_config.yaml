@@ -1,0 +1,14 @@
+wrongcuts_thresholds:
+  web_ratio: 0.8
+  datamodel_ratio: 0.6
+  logic_ratio: 0.8
+  min_count: 1
+
+megaService_thresholds:
+  loc_ratio: 0.39
+  api_ratio: 0.2
+
+nanoService_thresholds:
+  loc_ratio: 0.2
+  files_ratio: 0.2
+  api_ratio: 0.03
